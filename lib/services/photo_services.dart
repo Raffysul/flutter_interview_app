@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class PhotoService {
-  Future<void> _getPhotos() async {
-    var client = http.Client;
-    var uri = Uri.parse('https://jsonplaceholder.typicode.com/photos');
-    var response = await client.get(uri);
+import '../models/photos.dart';
+
+  Future<Photos> getPhotos() async {
+   final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+
     if (response.statusCode == 200) {
-      var json = response.body;
-      return
+      return Photos.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load Pictures');
     }
-    return null;
+
   }
-}
