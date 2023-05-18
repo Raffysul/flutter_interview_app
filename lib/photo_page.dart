@@ -32,31 +32,35 @@ class _MyPhotoPageState extends State<MyPhotoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white54,
       body: SafeArea(
           child: _photos.isNotEmpty
-              ? GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10),
-                  itemCount: _photos.length,
-                  itemBuilder: (context, index) {
-                    final photo = _photos[index];
-                    return GridTile(
-                      footer: GridTileBar(
-                        backgroundColor: Colors.lightGreenAccent,
-                        title: Text(
-                          photo.title,
-                          textAlign: TextAlign.center,
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10),
+                    itemCount: _photos.length,
+                    itemBuilder: (context, index) {
+                      final photo = _photos[index];
+                      return GridTile(
+                        footer: GridTileBar(
+                          backgroundColor: Colors.amberAccent,
+                          title: Text(
+                            photo.title,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                      child: Image.network(
-                        photo.thumbnailUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    );
-                  },
-                )
+                        child: Image.network(
+                          photo.thumbnailUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
+              )
               : const Center(
                   child: CircularProgressIndicator(),
                 )),
